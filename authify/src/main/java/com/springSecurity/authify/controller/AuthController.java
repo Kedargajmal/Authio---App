@@ -28,6 +28,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "https://authios-frontend.vercel.app/", allowCredentials = "true")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;

@@ -28,7 +28,6 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "https://authios-frontend.vercel.app/", allowCredentials = "true")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
@@ -70,7 +69,7 @@ public class AuthController {
         {
             Map<String, Object> error = new HashMap<>();
             error.put("error", true);
-            error.put("message", "Authentication Failed");
+            error.put("message", "Authentication Failed: " + ex.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
         }
 
@@ -117,7 +116,8 @@ public class AuthController {
 
     @PostMapping("/verify-otp")
     public void verifyEmail(@RequestBody Map<String, Object> request, @CurrentSecurityContext(expression = "authentication?.name") String email){
-        if (request.get("otp").toString() == null)
+        Object otp = request.get("otp");
+        if (otp == null)
         {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "MISSING DETAILS");
         }

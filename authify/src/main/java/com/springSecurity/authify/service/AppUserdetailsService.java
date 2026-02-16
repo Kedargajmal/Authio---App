@@ -24,7 +24,8 @@ public class AppUserdetailsService implements UserDetailsService {
         UserEntity existingUser = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Email not found for email: " + email));
 
-        return new User(existingUser.getEmail(), existingUser.getPassword(), new ArrayList<>());
+        return new User(existingUser.getEmail(), existingUser.getPassword(), 
+                java.util.Collections.singletonList(new org.springframework.security.core.authority.SimpleGrantedAuthority("ROLE_USER")));
 //            .withUsername(existingUser.getEmail())
 //                .password(existingUser.getPassword())
 //                .authorities("USER")

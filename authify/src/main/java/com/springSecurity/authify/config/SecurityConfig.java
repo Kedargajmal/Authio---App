@@ -154,7 +154,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // 1. Link CORS explicitly to our custom configuration source
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
@@ -182,7 +181,6 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        // Exact origins: No trailing slashes, matching your Vercel URL exactly
         config.setAllowedOrigins(Arrays.asList(
                 "https://authios-frontend.vercel.app",
                 "http://localhost:5173"

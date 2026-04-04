@@ -182,7 +182,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowedOrigins(Arrays.asList(
-                "https://authios-frontend.vercel.app",
+                "https://authio-frontend.vercel.app",
                 "http://localhost:5173"
         ));
 
